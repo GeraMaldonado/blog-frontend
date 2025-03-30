@@ -1,0 +1,33 @@
+.divLogin{
+  border-radius: 10px;
+  background-color: rgb(40, 36, 58);
+  width: 280px;
+  height: 200px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.loginForm{
+  width: 90%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 8px;
+}
+
+.loginForm > input{
+  border-radius: 3px;
+  height: 30px;
+  background-color: rgb(233, 233, 234);
+  border-color: transparent;
+}
+
+.loginForm > button{
+  height: 40px;
+  background-color: rgb(56, 47, 94);
+  border-color: rgb(101, 89, 153);
+  border-radius: 3px;
+  color: rgb(200, 200, 202);
+}
