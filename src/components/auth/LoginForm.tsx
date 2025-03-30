@@ -1,23 +1,15 @@
 import { useState } from 'react'
+import { useAuth } from '../../contexts/AuthContext'
 
-export function LoginForm (): React.FC<Element> {
-  const [user, setUser] = useState(null)
+export function LoginForm () {
+  const { login } = useAuth()
 
-  const handleSubmit = (event: any): void => {
+  const handleSubmit = async (event: any): Promise<void> => {
     event.preventDefault()
     const form = event.target
     const formDate = new FormData(form)
-    const entries = Object.fromEntries(formDate.entries())
-    fetch('http://localhost:3010/api/auth/login', {
-      method: 'POST',
-      credentials: 'include',
-      body: JSON.stringify(entries),
-      headers: {
-        'Content-Type': 'application/json'
-      }
-    }).then(async res => await res.json()).then(json => {
-      setUser(json)
-    }).catch(err => console.error(err))
+    const { email, password } = Object.fromEntries(formDate.entries())
+    await login({ email, password })
   }
 
   return (
