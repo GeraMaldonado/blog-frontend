@@ -14,7 +14,7 @@ interface AuthContextType {
 
 const AuthContext = createContext<AuthContextType | null>(null)
 
-export async function AuthProvider ({ children }: { children: React.ReactNode }): Promise<React.FC> {
+export function AuthProvider ({ children }: { children: React.ReactNode }): React.FC {
   const [user, setUser] = useState<User | null>(null)
 
   const login = async ({ email, password }: { email: string, password: string }): Promise<void> => {
