@@ -1,4 +1,9 @@
+import './App.css'
 
 export function App (): React.FC {
-  return (<h1>Prueba desde App</h1>)
+  return (
+    <>
+      <h1>Prueba desde App</h1>
+    </>
+  )
 }
