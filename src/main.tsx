@@ -1,6 +1,6 @@
 import { createRoot } from 'react-dom/client'
 import { StrictMode } from 'react'
-import { App } from './App.tsx'
+import { App } from './App'
 import { AuthProvider } from './contexts/AuthContext.js'
 
 const root = createRoot(document.getElementById('root')!)
