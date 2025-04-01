@@ -11,3 +11,12 @@ export async function loginUser ({ email, password }: { email: string, password:
   const json = await res.json()
   return json.data
 }
+
+export async function logoutUser (): Promise<void> {
+  const res = await fetch('http://localhost:3010/api/auth/logout', {
+    method: 'POST',
+    credentials: 'include'
+  })
+  if (!res.ok) throw new Error('Error al cerrar sesión')
+  console.log(res)
+}
