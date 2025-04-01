@@ -1,5 +1,5 @@
 import React, { createContext, useContext, useState } from 'react'
-import { loginUser } from '../services/authService'
+import { loginUser, logoutUser } from '../services/authService'
 
 interface User {
   id: string
@@ -10,6 +10,7 @@ interface User {
 interface AuthContextType {
   user: User | null
   login: ({ email, password }: { email: string, password: string }) => Promise<void>
+  logout: () => Promise<void>
 }
 
 const AuthContext = createContext<AuthContextType | null>(null)
@@ -26,8 +27,17 @@ export function AuthProvider ({ children }: { children: React.ReactNode }): Reac
     }
   }
 
+  const logout = async (): Promise<void> => {
+    try {
+      await logoutUser()
+      setUser(null)
+    } catch (error) {
+      console.error('Error en logout', error)
+    }
+  }
+
   return (
-    <AuthContext.Provider value={{ user, login }}>
+    <AuthContext.Provider value={{ user, login, logout }}>
       {children}
     </AuthContext.Provider>
   )
