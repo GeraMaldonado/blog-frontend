@@ -10,6 +10,14 @@ export function RegisterForm (): React.FC {
     const formData = new FormData(form)
     const { name, email, username, password } = Object.fromEntries(formData.entries())
     setUser({ name, email, username, password })
+    /*
+ *Falta comprobar las contraseñas
+ *Limpiar codigo
+ *Refactorizar
+ *Validaciones
+ *Estilos
+ *
+ */
 
     await sendVerificationCode({ name, email })
 
@@ -22,7 +30,9 @@ export function RegisterForm (): React.FC {
     const formData = new FormData(form)
     const { code } = Object.fromEntries(formData.entries())
 
-    await registerUser({ ...user, code })
+    const { name, password, email, username } = user
+
+    await registerUser({ name, password, email, username, code })
   }
 
   return (
@@ -40,12 +50,12 @@ export function RegisterForm (): React.FC {
           <label>Repetir Password: </label>
           <input type='password' className='formRegister-password2' name='password2' /><br />
           <button className='formRegister-btn-send' type='submit'>Enviar codigo</button>
-        </form>
+          </form>
         : <form className='formVerify' onSubmit={handlerSubmitVerify}>
           <label>Codigo: </label>
-          <input /><br />
-          <button type='submit' />
-          </form>}
+          <input name='code' /><br />
+          <button type='submit'>Enviar codigo</button>
+        </form>}
     </div>
   )
 }
