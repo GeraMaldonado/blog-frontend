@@ -16,12 +16,16 @@ interface AuthContextType {
 const AuthContext = createContext<AuthContextType | null>(null)
 
 export function AuthProvider ({ children }: { children: React.ReactNode }): React.FC {
-  const [user, setUser] = useState<User | null>(null)
+  const [user, setUser] = useState<User | null>(() => {
+    const saved = localStorage.getItem('user')
+    return saved ? JSON.parse(saved) : null
+  })
 
   const login = async ({ email, password }: { email: string, password: string }): Promise<void> => {
     try {
       const userData = await loginUser({ email, password })
       setUser(userData)
+      localStorage.setItem('user', JSON.stringify(userData))
     } catch (error) {
       console.error('Error en login', error)
     }
@@ -31,6 +35,7 @@ export function AuthProvider ({ children }: { children: React.ReactNode }): Reac
     try {
       await logoutUser()
       setUser(null)
+      localStorage.removeItem('user')
     } catch (error) {
       console.error('Error en logout', error)
     }
