@@ -6,7 +6,6 @@ export default function Navbar (): React.FC {
   const { user, logout } = useAuth()
 
   const handlerLogut = async (event): Promise<void> => {
-    console.log('Logout en Nav')
     event.preventDefault()
     await logout()
   }
